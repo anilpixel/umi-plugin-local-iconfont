@@ -1,0 +1,30 @@
+{
+  "name": "umi-plugin-local-iconfont",
+  "author": "anilpixel <eziosyanse@gmail.com>",
+  "version": "1.0.0",
+  "main": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "scripts": {
+    "dev": "father dev",
+    "build": "father build"
+  },
+  "keywords": [],
+  "authors": {
+    "name": "anilpixel <eziosyanse@gmail.com>",
+    "email": "eziosyanse@gmail.com"
+  },
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "@types/request": "^2.48.12",
+    "father": "^4.1.8",
+    "typescript": "^5.0.3",
+    "umi": "^4.2.5"
+  },
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
