@@ -1,8 +1,5 @@
 # umi-plugin-local-iconfont
 
-[![NPM version](https://img.shields.io/npm/v/iconfont.svg?style=flat)](https://npmjs.org/package/umi-plugin-local-iconfont)
-[![NPM downloads](http://img.shields.io/npm/dm/iconfont.svg?style=flat)](https://npmjs.org/package/umi-plugin-local-iconfont)
-
 在打包umi项目的时候，将 iconfont.js 打包到本地使用。
 
 ## Install

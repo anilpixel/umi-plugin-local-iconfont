@@ -23,6 +23,7 @@ export default (api: IApi) => {
         return Joi.object({
           fontPath: Joi.string().optional(),
           urls: Joi.array().items(Joi.string()).optional(),
+          publicPath: Joi.string().optional(),
         });
       },
       default: {
@@ -34,7 +35,11 @@ export default (api: IApi) => {
 
   const { paths } = api;
   const { absOutputPath } = paths;
-  const { urls = [], fontPath = './iconfont' } = api.userConfig.localIconfont;
+  const {
+    urls = [],
+    fontPath = './iconfont',
+    publicPath = '',
+  } = api.userConfig.localIconfont;
   const absFontPath = path.join(absOutputPath, fontPath);
 
   const addScript = () => {
@@ -44,7 +49,7 @@ export default (api: IApi) => {
     } else {
       api.addHTMLHeadScripts(() =>
         urls.map((url: string) => ({
-          src: `${fontPath}/${getFileName(url)}`,
+          src: `${publicPath}${fontPath}/${getFileName(url)}`,
         })),
       );
 
