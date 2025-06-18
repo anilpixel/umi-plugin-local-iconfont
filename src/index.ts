@@ -1,7 +1,7 @@
-import path from 'path';
-import type { IApi } from 'umi';
 import fs from 'fs';
+import path from 'path';
 import request from 'request';
+import type { IApi } from 'umi';
 
 const getFileName = (url: string): string | undefined => {
   const regex = /\/([^/]+\.js)$/;
@@ -24,6 +24,7 @@ export default (api: IApi) => {
           fontPath: Joi.string().optional(),
           urls: Joi.array().items(Joi.string()).optional(),
           publicPath: Joi.string().optional(),
+          async: Joi.boolean().default(true).optional(),
         });
       },
       default: {
@@ -39,17 +40,21 @@ export default (api: IApi) => {
     urls = [],
     fontPath = './iconfont',
     publicPath = '',
+    async = true,
   } = api.userConfig.localIconfont;
   const absFontPath = path.join(absOutputPath, fontPath);
 
   const addScript = () => {
     if (process.env.NODE_ENV == 'development') {
       // 开发环境直接使用
-      api.addHTMLHeadScripts(() => urls.map((url: string) => ({ src: url })));
+      api.addHTMLHeadScripts(() =>
+        urls.map((url: string) => ({ src: url, async })),
+      );
     } else {
       api.addHTMLHeadScripts(() =>
         urls.map((url: string) => ({
-          src: `${publicPath}${fontPath}/${getFileName(url)}`,
+          src: path.join(publicPath, fontPath, getFileName(url) || ''),
+          async,
         })),
       );
 
